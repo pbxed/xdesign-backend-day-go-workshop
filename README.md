@@ -36,6 +36,6 @@ A completed suggested solution for both parts 1 and 2 is available in the branch
 
 Once you have a solution use the following commands in the terminal to run your code
 
-> go run .
-> 
-> go test .
+`go run .`
+
+`go test .`
