@@ -1,87 +1,63 @@
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"os"
-	"strconv"
-	"strings"
-)
-
 func main() {
-	answer := getAnswer("day_one.txt", 2)
 
-	fmt.Printf("Output: %d\n", answer)
+	// Uncomment once you are ready to test your code.
+	// answer := getAnswer("day_one.txt", 1)
+
+	// fmt.Printf("Output: %d\n", answer)
 }
 
 func getAnswer(filePath string, part int) int {
-	file, err := os.Open(filePath) // Open the file
+	// Open the file. Check https://pkg.go.dev/os 
 
-	check(err) // check for errors opening the file
+	// Check for any errors. https://go.dev/blog/error-handling-and-go 
 
-	defer file.Close() // Defer delays the execution of this line until we get to the end of this function
-	// file.Close() closes the file so it can not be used by IO anymore.
+	// We want to close the file at the end of this function. F
+	// For that we can use the 'defer' keyword. https://go.dev/tour/flowcontrol/12
 
-	buf, err := ioutil.ReadFile(filePath) // read in file
-	check(err)                            // check for errors
+	// Read in the contents of the file
+	
+	// Check for errors again. Should we refactor this code duplication?
 
-	var directions = [][2]int{
-		{-1, 0}, // North
-		{0, 1},  // East
-		{1, 0},  // South
-		{0, -1}, // West
-	}
+	// We need a way of tracking how many blocks we should travel and in which direction. 
+	// We are told that the city we are in is based on a grid system and so we can only 
+	// turn in 90 degree increments, or put differently, North, South, East, West. Lets
+	// create a 2D array to capture the 4 different directions we can travel.
+	// https://gobyexample.com/arrays
+	// https://gobyexample.com/slices
 
-	visited := map[[2]int]bool{ // A Map of Key: 2D slice containing slices of 2 digit ints with Value: boolean flag
-		{0, 0}: true, // We mark the starting position as having already been visited
-	}
+	// *** COME BACK TO THIS ONCE YOU HAVE COMPLETED PART 1 ***
+	// We need a way of tracking where we have already visited. One way of doing this is 
+	// to create a map where the key is an array of our current coordinates and the value
+	// is a boolean where false indicates we haven't visited the current location before
+	// true indicates we have. Create a map with the structure mentioned above. Don't 
+	// forget to mark our start position as having already been visited.
+	// https://gobyexample.com/maps
 
-	var directionIndex int // Keep track of which way we are facing
-	var x, y int           // Keep track of our position in the grid
+	// Create a variable of type int to track of which way we are facing.
+	// Create variables to track of our position in the grid.
+	// https://gobyexample.com/variables
 
-	for _, instruction := range strings.Split(strings.TrimSpace(string(buf)), ", ") { // Iterate over every movement instruction
-		turn := string(instruction[0])               // Takes the first char of each instruction
-		numSteps, _ := strconv.Atoi(instruction[1:]) // Takes the number of numSteps of each instruction
+	// We need to split our instructions up separately and remove any whitespace. 
+	// https://pkg.go.dev/strings 
+	// Now its time to analyse the instructions. For this we will use a for loop. 
+	// https://gobyexample.com/for & https://gobyexample.com/range
+	
+	// Iterate over every movement instruction
+	// Retrieve the first character of a single instruction
+	// Retrieve the number of blocks of a single instruction numSteps, 
 
-		if turn == "R" {
-			directionIndex = (directionIndex + 1) % 4 // Modulo 4 as we only have 4 possible directions we can be facing
-		} else if turn == "L" {
-			directionIndex = (directionIndex + 3) % 4 // +3 instead of -1 so that we dont have to deal with negative numbers
-		} else {
-			panic("direction instruction other than Right or Left found: " + turn) // Throw error if our instructions contain something other than R or L turn instruction
-		}
+	// Use if/else block to change the direction we are facing. 
+	// Dont forget to consider what happens if we turn >= 360 degrees
 
-		for i := 0; i < numSteps; i++ { // Move one step at a time
-			x += directions[directionIndex][0] // track where we are in on the grid
-			y += directions[directionIndex][1]
-			// check if we have visited before
-			if visited[[2]int{x, y}] && part == 2 {
-				return distance(x, y)
-			}
-			// if not visited before mark visited
-			visited[[2]int{x, y}] = true
-		}
-	}
-	return distance(x, y)
-}
+	// We are now facing the correct direction. We will use another for loop to move
+	// one block at a time and track where we are in on the grid.
 
-func distance(x, y int) int {
-	// Assume starting position is (0,0)
+	// *** COME BACK TO THIS ONCE YOU HAVE COMPLETED PART 1 ***	
+	// Check if we have visited our current location before
+	// If we haven't visited before, update the map
 
-	if x < 0 {
-		x = -x
-	}
-
-	if y < 0 {
-		y = -y
-	}
-
-	// Distance given by |x|+|y|
-	return x + y
-}
-
-func check(err error) {
-	if err != nil {
-		panic(err)
-	}
+	// Finally calculate the total distance in blocks and return
+	return 0
 }
