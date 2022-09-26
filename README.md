@@ -30,6 +30,8 @@ How many blocks away is the first location you visit twice?
 
 ### - Instructions
 
+You should have go installed. If not run the command `brew install go` in your terminal. You will need a code editor. Vscode + the official go extension works well. `brew install --cask visual-studio-code` to install Vscode & for the extension https://marketplace.visualstudio.com/items?itemName=golang.go.
+
 You can select which difficulty setting you wish to attempt. Checkout the branch `day_one_easy_mode` where you will find a suggested solution given in pseudocode that you can follow. Alternatively, checkout the branch `day_one_hard_mode` where all you are given is an empty function in which to write your code. 
 
 A completed suggested solution for both parts 1 and 2 is available in the branch `day_one_solution`
