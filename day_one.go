@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	answer := getAnswer("day_one.txt", 2)
+	answer := getAnswer("xdesign_day_one.txt", 2)
 
 	fmt.Printf("Output: %d\n", answer)
 }
@@ -22,8 +21,8 @@ func getAnswer(filePath string, part int) int {
 	defer file.Close() // Defer delays the execution of this line until we get to the end of this function
 	// file.Close() closes the file so it can not be used by IO anymore.
 
-	buf, err := ioutil.ReadFile(filePath) // read in file
-	check(err)                            // check for errors
+	buf, err := os.ReadFile(filePath) // read in file
+	check(err)                        // check for errors
 
 	var directions = [][2]int{
 		{-1, 0}, // North
